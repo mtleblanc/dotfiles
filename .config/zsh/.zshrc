@@ -23,6 +23,8 @@ alias glol='git log --graph --oneline --decorate'
 # History options
 setopt HIST_SAVE_NO_DUPS
 
+bindkey -e
+
 autoload -U compinit; compinit
 _comp_options+=(globdots)
 
