@@ -1,6 +1,13 @@
 bindkey -e
 
-autoload -U compinit; compinit
+autoload -U compinit
+if [ -z "$XDG_CACHE_HOME" ]
+then
+  compinit
+else
+  compinit -d "$XDG_CACHE_HOME/zsh/zcompdump"
+fi
+
 _comp_options+=(globdots)
 
 fpath=("$ZDOTDIR/prompts" $fpath)
