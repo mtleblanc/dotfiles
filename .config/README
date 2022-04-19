@@ -1,0 +1,3 @@
+git clone --bare git@github.com:mtleblanc/dotfilegit $HOME/.dotfilegit
+alias .git='/usr/bin/git --git-dir=$HOME/.dotfilegit/ --work-tree=$HOME'
+.git checkout
