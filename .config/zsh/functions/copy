@@ -1,0 +1,4 @@
+copy() {
+  cat "$@" | xclip -selection clipboard
+}
+copy "$@"

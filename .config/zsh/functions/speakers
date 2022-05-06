@@ -1,0 +1,8 @@
+speakers() {
+  if [ $# -eq 0 ]; then
+    pactl set-default-sink 1
+  else
+    pactl set-sink-volume 1 "$@"
+  fi
+}
+speakers "$@"

@@ -1,0 +1,4 @@
+hist() {
+  history 1 | grep "$@"
+}
+hist "$@"

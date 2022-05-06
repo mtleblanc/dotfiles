@@ -1,0 +1,4 @@
+pasteto() {
+  xclip -o -selection clipboard > "$@"
+}
+pasteto "$@"
