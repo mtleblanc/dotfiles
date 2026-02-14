@@ -46,13 +46,19 @@ command -v batcat &>/dev/null && alias bat='batcat'
 
 # ── fzf ──────────────────────────────────────────────────
 if command -v fzf &>/dev/null; then
-    source <(fzf --zsh)
     export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border"
     # Use fd if available
-    if command -v fd &>/dev/null; then
-        export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
-    elif command -v fdfind &>/dev/null; then
+    if command -v fdfind &>/dev/null; then
         export FZF_DEFAULT_COMMAND='fdfind --type f --hidden --follow --exclude .git'
+    elif command -v fd &>/dev/null; then
+        export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+    fi
+    # fzf 0.48+ supports --zsh; older versions ship separate scripts
+    if fzf --zsh &>/dev/null; then
+        source <(fzf --zsh)
+    else
+        [[ -f /usr/share/doc/fzf/examples/key-bindings.zsh ]] && source /usr/share/doc/fzf/examples/key-bindings.zsh
+        [[ -f /usr/share/doc/fzf/examples/completion.zsh ]]   && source /usr/share/doc/fzf/examples/completion.zsh
     fi
 fi
 
