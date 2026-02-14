@@ -1,0 +1,25 @@
+[user]
+	name = mtleblanc
+	email = mtleblanc@users.noreply.github.com
+
+[core]
+	autocrlf = input
+	editor = nvim
+
+[init]
+	defaultBranch = main
+
+[push]
+	autoSetupRemote = true
+
+[pull]
+	rebase = true
+
+[alias]
+	co = checkout
+	br = branch
+	st = status
+	lg = log --oneline --graph --decorate --all
+	cm = commit
+	df = diff
+	last = log -1 HEAD
