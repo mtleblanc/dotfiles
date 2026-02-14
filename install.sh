@@ -36,6 +36,16 @@ if ! command -v starship &>/dev/null; then
     curl -sS https://starship.rs/install.sh | sh -s -- -y
 fi
 
+# ── SSH key ───────────────────────────────────────────────
+if [[ ! -f "$HOME/.ssh/id_ed25519" ]]; then
+    echo "Generating SSH key..."
+    ssh-keygen -t ed25519 -C "mtleblanc" -f "$HOME/.ssh/id_ed25519" -N ""
+    echo ""
+    echo "Public key (add to GitHub at https://github.com/settings/ssh/new):"
+    cat "$HOME/.ssh/id_ed25519.pub"
+    echo ""
+fi
+
 # ── Clone zsh plugins ───────────────────────────────────
 mkdir -p "$ZSH_PLUGINS"
 
