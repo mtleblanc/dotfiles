@@ -12,7 +12,7 @@ echo "Detected OS: $OS"
 if [[ "$OS" == "Linux" ]]; then
     echo "Installing packages via apt..."
     sudo apt update
-    sudo apt install -y zsh stow ripgrep fd-find unzip
+    sudo apt install -y zsh stow ripgrep fd-find fzf bat unzip
 
     # Neovim (PPA for 0.10+)
     if ! command -v nvim &>/dev/null || [[ "$(nvim --version | head -1 | grep -oP '\d+\.\d+')" < "0.10" ]]; then
@@ -27,7 +27,7 @@ elif [[ "$OS" == "Darwin" ]]; then
         echo "Homebrew not found. Install it from https://brew.sh"
         exit 1
     fi
-    brew install zsh stow neovim ripgrep fd starship
+    brew install zsh stow neovim ripgrep fd fzf bat starship
 fi
 
 # ── Install Starship ────────────────────────────────────
