@@ -64,7 +64,7 @@ echo "Stowing dotfiles..."
 cd "$DOTFILES"
 for pkg in zsh tmux nvim git starship; do
     echo "  Stowing $pkg..."
-    stow -R "$pkg"
+    stow -R --no-folding "$pkg"
 done
 
 # ── Change default shell ────────────────────────────────
