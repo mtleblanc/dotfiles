@@ -12,7 +12,7 @@ echo "Detected OS: $OS"
 if [[ "$OS" == "Linux" ]]; then
     echo "Installing packages via apt..."
     sudo apt update
-    sudo apt install -y zsh stow ripgrep fd-find fzf bat unzip
+    sudo apt install -y zsh stow ripgrep fd-find fzf bat unzip gcc
 
     # Neovim (PPA for 0.10+)
     if ! command -v nvim &>/dev/null || [[ "$(nvim --version | head -1 | grep -oP '\d+\.\d+')" < "0.10" ]]; then

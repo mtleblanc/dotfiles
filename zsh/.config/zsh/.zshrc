@@ -2,13 +2,19 @@
 
 # ── History ──────────────────────────────────────────────
 HISTFILE="$XDG_STATE_HOME/zsh/history"
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=100000
+SAVEHIST=100000
 mkdir -p "${HISTFILE:h}"
-setopt SHARE_HISTORY          # share across sessions
+setopt INC_APPEND_HISTORY     # write to history file immediately, but don't redd
+setopt EXTENDED_HISTORY       # save timestamps and durations
 setopt HIST_IGNORE_ALL_DUPS   # no duplicates
 setopt HIST_REDUCE_BLANKS     # trim whitespace
 setopt HIST_IGNORE_SPACE      # skip commands starting with space
+
+setopt AUTO_PUSHD             # cd automatically stores previous directory on stack.  cd - or cd -n to backtrack
+setopt PUSHD_SILENT
+setopt PUSHD_IGNORE_DUPS
+export DIRSTACKSIZE=40
 
 # ── Completion ───────────────────────────────────────────
 autoload -Uz compinit
