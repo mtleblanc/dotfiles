@@ -10,6 +10,9 @@ fi
 # User binaries
 [[ -d "$HOME/.local/bin" ]] && export PATH="$HOME/.local/bin:$PATH"
 
+# mise (version manager) — shims for non-interactive shells
+[[ -f "$HOME/.local/bin/mise" ]] && eval "$("$HOME/.local/bin/mise" activate zsh --shims)"
+
 # Default editor
 export EDITOR="nvim"
 export VISUAL="nvim"

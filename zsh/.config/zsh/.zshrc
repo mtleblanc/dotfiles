@@ -81,5 +81,10 @@ if [[ -f "$ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; 
     source "$ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 fi
 
+# ── mise (version manager) ──────────────────────────────
+if command -v mise &>/dev/null; then
+    eval "$(mise activate zsh)"
+fi
+
 # ── Prompt ───────────────────────────────────────────────
 eval "$(starship init zsh)"

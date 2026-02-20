@@ -20,7 +20,7 @@ Personal dotfiles for zsh, tmux, neovim, git, and starship prompt. Managed with 
 stow -R --no-folding <package>
 
 # Stow all packages
-for pkg in zsh tmux nvim git starship; do stow -R --no-folding "$pkg"; done
+for pkg in zsh tmux nvim git starship mise; do stow -R --no-folding "$pkg"; done
 ```
 
 ## Architecture
@@ -34,6 +34,7 @@ Each top-level directory is a **stow package** — its contents mirror `$HOME` s
 - **tmux/** — prefix is `C-a`, vi-style navigation, uses TPM (auto-bootstrapped).
 - **git/** — config at `.config/git/config` (XDG path, no `~/.gitconfig`).
 - **starship/** — prompt config at `.config/starship.toml`.
+- **mise/** — global [mise](https://mise.jdx.dev/) config at `.config/mise/config.toml`. Manages python, java, cmake versions.
 
 ### Conventions
 

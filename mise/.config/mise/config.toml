@@ -1,0 +1,4 @@
+[tools]
+python = "latest"
+java = "latest"
+cmake = "latest"

@@ -12,7 +12,11 @@ echo "Detected OS: $OS"
 if [[ "$OS" == "Linux" ]]; then
     echo "Installing packages via apt..."
     sudo apt update
-    sudo apt install -y zsh stow ripgrep fd-find fzf bat unzip gcc
+    sudo apt install -y zsh stow ripgrep fd-find fzf bat unzip gcc-14 g++-14 libssl-dev clangd python3-venv
+
+    # Set gcc-14/g++-14 as default gcc/g++
+    sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-14 100
+    sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 100
 
     # Neovim (PPA for 0.10+)
     if ! command -v nvim &>/dev/null || [[ "$(nvim --version | head -1 | grep -oP '\d+\.\d+')" < "0.10" ]]; then
@@ -34,6 +38,12 @@ fi
 if ! command -v starship &>/dev/null; then
     echo "Installing Starship prompt..."
     curl -sS https://starship.rs/install.sh | sh -s -- -y
+fi
+
+# ── Install mise ───────────────────────────────────────────
+if ! command -v mise &>/dev/null; then
+    echo "Installing mise..."
+    curl https://mise.run | sh
 fi
 
 # ── SSH key ───────────────────────────────────────────────
@@ -62,10 +72,16 @@ fi
 # ── Stow packages ───────────────────────────────────────
 echo "Stowing dotfiles..."
 cd "$DOTFILES"
-for pkg in zsh tmux nvim git starship; do
+for pkg in zsh tmux nvim git starship mise; do
     echo "  Stowing $pkg..."
     stow -R --no-folding "$pkg"
 done
+
+# ── Install mise tools ─────────────────────────────────
+if command -v mise &>/dev/null; then
+    echo "Installing mise tools..."
+    mise install
+fi
 
 # ── Change default shell ────────────────────────────────
 ZSH_PATH="$(which zsh)"
