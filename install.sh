@@ -81,7 +81,8 @@ done
 # ── Bootstrap Neovim plugins ───────────────────────────
 if command -v nvim &>/dev/null; then
     echo "Bootstrapping Neovim plugins (headless)..."
-    nvim --headless "+Lazy! sync" +qa 2>/dev/null
+    nvim --headless "+Lazy! sync" \
+        -c "lua require('nvim-treesitter.install').install({'lua','vim','vimdoc'}):pwait(120000); vim.cmd('qa!')"
 fi
 
 # ── Install mise tools ─────────────────────────────────
