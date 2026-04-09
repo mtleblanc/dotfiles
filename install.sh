@@ -12,11 +12,12 @@ echo "Detected OS: $OS"
 if [[ "$OS" == "Linux" ]]; then
     echo "Installing packages via apt..."
     sudo apt update
-    sudo apt install -y zsh stow ripgrep fd-find fzf bat unzip gcc-14 g++-14 libssl-dev clangd python3-venv
+    sudo apt install -y zsh stow ripgrep fd-find fzf bat unzip gcc-14 g++-14 make libssl-dev clangd python3-venv
 
-    # Set gcc-14/g++-14 as default gcc/g++
+    # Set gcc-14/g++-14 as default gcc/g++/cc
     sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-14 100
     sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 100
+    sudo update-alternatives --install /usr/bin/cc cc /usr/bin/gcc-14 100
 
     # Neovim (PPA for 0.10+)
     if ! command -v nvim &>/dev/null || [[ "$(printf '%s\n' "0.10" "$(nvim --version | head -1 | grep -oP '\d+\.\d+\.\d+')" | sort -V | head -1)" != "0.10" ]]; then
@@ -76,6 +77,12 @@ for pkg in zsh tmux nvim git starship mise; do
     echo "  Stowing $pkg..."
     stow -R --no-folding "$pkg"
 done
+
+# ── Bootstrap Neovim plugins ───────────────────────────
+if command -v nvim &>/dev/null; then
+    echo "Bootstrapping Neovim plugins (headless)..."
+    nvim --headless "+Lazy! sync" +qa 2>/dev/null
+fi
 
 # ── Install mise tools ─────────────────────────────────
 if command -v mise &>/dev/null; then
