@@ -19,7 +19,7 @@ if [[ "$OS" == "Linux" ]]; then
     sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 100
 
     # Neovim (PPA for 0.10+)
-    if ! command -v nvim &>/dev/null || [[ "$(nvim --version | head -1 | grep -oP '\d+\.\d+')" < "0.10" ]]; then
+    if ! command -v nvim &>/dev/null || [[ "$(printf '%s\n' "0.10" "$(nvim --version | head -1 | grep -oP '\d+\.\d+\.\d+')" | sort -V | head -1)" != "0.10" ]]; then
         echo "Installing Neovim from PPA..."
         sudo add-apt-repository -y ppa:neovim-ppa/unstable
         sudo apt update
