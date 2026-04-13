@@ -1,12 +1,12 @@
 return {
 	"mfussenegger/nvim-dap",
-	config = function()
+	opts = function()
 		local dap = require("dap")
 		local adapter = {
 			type = "server",
 			port = "${port}",
 			executable = {
-				command = vim.fn.exepath("codelldb"),
+				command = "codelldb",
 				args = { "--port", "${port}" },
 			},
 		}
